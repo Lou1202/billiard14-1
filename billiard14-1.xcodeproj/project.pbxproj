@@ -9,21 +9,25 @@
 /* Begin PBXBuildFile section */
 		9A8ECC2229B9986D00686C6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8ECC2129B9986D00686C6A /* AppDelegate.swift */; };
 		9A8ECC2429B9986D00686C6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8ECC2329B9986D00686C6A /* SceneDelegate.swift */; };
-		9A8ECC2629B9986D00686C6A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8ECC2529B9986D00686C6A /* ViewController.swift */; };
 		9A8ECC2929B9986D00686C6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A8ECC2729B9986D00686C6A /* Main.storyboard */; };
 		9A8ECC2B29B9986E00686C6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A8ECC2A29B9986E00686C6A /* Assets.xcassets */; };
 		9A8ECC2E29B9986E00686C6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A8ECC2C29B9986E00686C6A /* LaunchScreen.storyboard */; };
+		9A8ECC3829BA087E00686C6A /* SetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8ECC3729BA087E00686C6A /* SetViewController.swift */; };
+		9A8ECC3A29BA09CA00686C6A /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8ECC3929BA09CA00686C6A /* ScoreViewController.swift */; };
+		9A8ECC3E29BC81BC00686C6A /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8ECC3D29BC81BC00686C6A /* AlertViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9A8ECC1E29B9986D00686C6A /* billiard14-1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "billiard14-1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A8ECC2129B9986D00686C6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A8ECC2329B9986D00686C6A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9A8ECC2529B9986D00686C6A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9A8ECC2829B9986D00686C6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9A8ECC2A29B9986E00686C6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A8ECC2D29B9986E00686C6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9A8ECC2F29B9986E00686C6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9A8ECC3729BA087E00686C6A /* SetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewController.swift; sourceTree = "<group>"; };
+		9A8ECC3929BA09CA00686C6A /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		9A8ECC3D29BC81BC00686C6A /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +62,13 @@
 			children = (
 				9A8ECC2129B9986D00686C6A /* AppDelegate.swift */,
 				9A8ECC2329B9986D00686C6A /* SceneDelegate.swift */,
-				9A8ECC2529B9986D00686C6A /* ViewController.swift */,
 				9A8ECC2729B9986D00686C6A /* Main.storyboard */,
+				9A8ECC3729BA087E00686C6A /* SetViewController.swift */,
+				9A8ECC3929BA09CA00686C6A /* ScoreViewController.swift */,
 				9A8ECC2A29B9986E00686C6A /* Assets.xcassets */,
 				9A8ECC2C29B9986E00686C6A /* LaunchScreen.storyboard */,
 				9A8ECC2F29B9986E00686C6A /* Info.plist */,
+				9A8ECC3D29BC81BC00686C6A /* AlertViewController.swift */,
 			);
 			path = "billiard14-1";
 			sourceTree = "<group>";
@@ -138,8 +144,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A8ECC2629B9986D00686C6A /* ViewController.swift in Sources */,
+				9A8ECC3829BA087E00686C6A /* SetViewController.swift in Sources */,
+				9A8ECC3A29BA09CA00686C6A /* ScoreViewController.swift in Sources */,
 				9A8ECC2229B9986D00686C6A /* AppDelegate.swift in Sources */,
+				9A8ECC3E29BC81BC00686C6A /* AlertViewController.swift in Sources */,
 				9A8ECC2429B9986D00686C6A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
