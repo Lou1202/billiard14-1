@@ -160,14 +160,18 @@ class ScoreViewController: UIViewController {
     
     
     
-    
+    //A隊加分
     @IBAction func addScoreA(_ sender: Any) {
         
+        //單局雙方合計未達13分直接計分
         if scoreA + scoreB < 13 {
             scoreA += 1
+            //單局得分圖示位置移動
             playerABallView.frame.origin.y = CGFloat(60 + 40 * scoreA)
+            //Array紀錄得分扣分
             getScoreArray.append(playerAScore)
         } else if scoreA + scoreB < 14 {
+            //單局合計14分 計算雙方總分並顯示
             scoreA += 1
             playerABallView.frame.origin.y = CGFloat(60 + 40 * scoreA)
             roundScoreA = roundScoreA + scoreA - foulScoreA
@@ -176,9 +180,11 @@ class ScoreViewController: UIViewController {
             scoreBLabel.text = roundScoreB.formatted()
             getScoreArray.append(playerAScore)
         }
-        
+        //有設定獲勝分數 達標後會有獲勝提示
         if gameScore != nil && gameScore > 0{
-            if (roundScoreA + scoreA - foulScoreA) == gameScore {
+            if scoreA + scoreB < 14 && (roundScoreA + scoreA - foulScoreA) == gameScore {
+                showWinner()
+            } else if scoreA + scoreB == 14 && roundScoreA == gameScore {
                 showWinner()
             }
         }
@@ -203,7 +209,9 @@ class ScoreViewController: UIViewController {
         }
         
         if gameScore != nil && gameScore > 0{
-            if (roundScoreB + scoreB) == gameScore {
+            if scoreA + scoreB < 14 && (roundScoreB + scoreB - foulScoreB) == gameScore {
+                showWinner()
+            } else if scoreA + scoreB == 14 && roundScoreB == gameScore {
                 showWinner()
             }
         }
@@ -212,7 +220,7 @@ class ScoreViewController: UIViewController {
     
 
     
-    //A組犯規扣分
+    //A隊犯規扣分
     @IBAction func reduceScoreA(_ sender: Any) {
         
         if scoreA + scoreB != 14 {
@@ -223,7 +231,7 @@ class ScoreViewController: UIViewController {
     }
     
    
-    //B組犯規扣分
+    //B隊犯規扣分
     @IBAction func reduceScoreB(_ sender: Any) {
         
         if scoreA + scoreB != 14 {
@@ -249,7 +257,7 @@ class ScoreViewController: UIViewController {
     
     //繼續下一局
     @IBAction func changeNextGame(_ sender: Any) {
-        
+        //達到雙方進球總和14分 重置單局分數及得分圖示初始位置
         if scoreA + scoreB == 14 {
             scoreA = 0
             scoreB = 0
@@ -269,8 +277,9 @@ class ScoreViewController: UIViewController {
     
     //恢復上一步
     @IBAction func rewind(_ sender: Any) {
+        //利用Array.popLast找出最後一步的操作
         let lastScore = getScoreArray.popLast()
-        
+        //判斷條件後 恢復上一步
         switch lastScore {
             
         case playerAScore:

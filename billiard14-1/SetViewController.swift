@@ -25,12 +25,12 @@ class SetViewController: UIViewController {
 //        }
     
     
-    //收鍵盤
+    //點選空白處收鍵盤
     @IBAction func closeKeyboard(_ sender: Any) {
         view.endEditing(true)
     }
     
-    
+    //鍵盤按下return鍵收鍵盤
     @IBAction func returnCloseKeyboard(_ sender: Any) {
     }
     
