@@ -61,6 +61,7 @@ class ScoreViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
         initialUI()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        //進入畫面frame還沒計算好,先隱藏起來
         playerABallView.isHidden = true
         playerBBallView.isHidden = true
         
@@ -72,6 +73,7 @@ class ScoreViewController: UIViewController {
         playerABallView.frame.origin.x = score0Label.frame.origin.x - offsetX
         playerBBallView.frame.origin.y = score0Label.frame.origin.y
         playerBBallView.frame.origin.x = score0Label.frame.origin.x + offsetX
+        //frame計算好顯示計分view
         playerABallView.isHidden = false
         playerBBallView.isHidden = false
     }
@@ -140,11 +142,7 @@ class ScoreViewController: UIViewController {
         } else {
             secString = "\(seconds % 60)"
         }
-            
         return "比賽時間:\n\(hourSting):\(minString):\(secString)"
-        
-        
-        
     }
     
     func resetGame(){
@@ -175,16 +173,17 @@ class ScoreViewController: UIViewController {
         } else {
             winnerName = playerBLabel.text!
         }
-    
-        
         let controller = UIAlertController(title: "恭喜\(winnerName)獲勝", message: "🏆🏆🏆🏆🏆🏆", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "重置比賽", style: .default){
-            _ in
+        let resetAction = UIAlertAction(title: "維持設定 重新比賽", style: .default){ _ in
             self.resetGame()
         }
-        controller.addAction(okAction)
+        let newGameAction = UIAlertAction(title: "返回主畫面 設定新局", style: .cancel) { _ in
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+
+        controller.addAction(resetAction)
+        controller.addAction(newGameAction)
         present(controller, animated: true)
-        
         
         }
     
@@ -193,7 +192,7 @@ class ScoreViewController: UIViewController {
     //A隊加分
     @IBAction func addScoreA(_ sender: Any) {
         
-        //單局雙方合計未達13分直接計分
+        //單局雙方合計未達13分移動圖示
         if scoreA + scoreB < 13 {
             scoreA += 1
             //單局得分圖示位置移動
@@ -277,12 +276,12 @@ class ScoreViewController: UIViewController {
     
     @IBAction func reset(_ sender: Any) {
         
-        let controller = UIAlertController(title: "重置比賽", message: "確定要重置比賽", preferredStyle: .alert)
+        let controller = UIAlertController(title: "維持原設定 重新比賽", message: "確定要用現有設定重新比賽？", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "確定", style: .default){ _ in
             self.resetGame()
         }
-        controller.addAction(okAction)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        controller.addAction(okAction)
         controller.addAction(cancelAction)
         present(controller, animated: true)
         
@@ -358,12 +357,12 @@ class ScoreViewController: UIViewController {
     
     @IBAction func newGame(_ sender: Any) {
         
-        let controller = UIAlertController(title: "重開新局", message: "確定要返回主畫面重新設定玩家、獲勝條件嗎？", preferredStyle: .alert)
+        let controller = UIAlertController(title: "返回主畫面 重開新局", message: "確定要返回主畫面重新設定玩家、獲勝條件嗎？", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "確定", style: .default){ _ in
             self.navigationController?.popToRootViewController(animated: true)
         }
-        controller.addAction(okAction)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        controller.addAction(okAction)
         controller.addAction(cancelAction)
         present(controller, animated: true)
     }

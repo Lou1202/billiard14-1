@@ -20,9 +20,12 @@ class SetViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//            view.endEditing(true)
-//        }
+    override func viewWillDisappear(_ animated: Bool) {
+        //清空資料
+        playerATextField.text = ""
+        playerBTextField.text = ""
+        gameScoreTextField.text = ""
+    }
     
     
     //點選空白處收鍵盤
