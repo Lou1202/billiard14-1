@@ -39,15 +39,41 @@ class ScoreViewController: UIViewController {
     @IBOutlet weak var foulALabel: UILabel!
     @IBOutlet weak var foulBLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var score0Label: UILabel!
+    @IBOutlet weak var score1Label: UILabel!
+    @IBOutlet weak var score2Label: UILabel!
+    @IBOutlet weak var score3Label: UILabel!
+    @IBOutlet weak var score4Label: UILabel!
+    @IBOutlet weak var score5Label: UILabel!
+    @IBOutlet weak var score6Label: UILabel!
+    @IBOutlet weak var score7Label: UILabel!
+    @IBOutlet weak var score8Label: UILabel!
+    @IBOutlet weak var score9Label: UILabel!
+    @IBOutlet weak var score10Label: UILabel!
+    @IBOutlet weak var score11Label: UILabel!
+    @IBOutlet weak var score12Label: UILabel!
+    @IBOutlet weak var score13Label: UILabel!
+    @IBOutlet weak var score14Label: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        navigationController?.setNavigationBarHidden(true, animated: true)
         initialUI()
-        
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        playerABallView.isHidden = true
+        playerBBallView.isHidden = true
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let offsetX: CGFloat = 50
+        playerABallView.frame.origin.y = score0Label.frame.origin.y
+        playerABallView.frame.origin.x = score0Label.frame.origin.x - offsetX
+        playerBBallView.frame.origin.y = score0Label.frame.origin.y
+        playerBBallView.frame.origin.x = score0Label.frame.origin.x + offsetX
+        playerABallView.isHidden = false
+        playerBBallView.isHidden = false
     }
     
     @objc func updateTime(){
@@ -75,6 +101,12 @@ class ScoreViewController: UIViewController {
         } else {
             gameScoreLabel.text = "單局計分"
         }
+        
+        let offsetX: CGFloat = 50
+        playerABallView.frame.origin.y = score0Label.frame.origin.y
+        playerABallView.frame.origin.x = score0Label.frame.origin.x - offsetX
+        playerBBallView.frame.origin.y = score0Label.frame.origin.y
+        playerBBallView.frame.origin.x = score0Label.frame.origin.x + offsetX
         
     }
     
@@ -131,8 +163,6 @@ class ScoreViewController: UIViewController {
         scoreBLabel.text = roundScoreB.formatted()
         foulALabel.text = foulScoreA.formatted()
         foulBLabel.text = foulScoreB.formatted()
-        playerABallView.frame.origin.y = CGFloat(60)
-        playerBBallView.frame.origin.y = CGFloat(60)
         getScoreArray.removeAll()
         
     }
@@ -167,13 +197,14 @@ class ScoreViewController: UIViewController {
         if scoreA + scoreB < 13 {
             scoreA += 1
             //單局得分圖示位置移動
-            playerABallView.frame.origin.y = CGFloat(60 + 40 * scoreA)
+            updatePlayerViewsPosition()
             //Array紀錄得分扣分
             getScoreArray.append(playerAScore)
+            
         } else if scoreA + scoreB < 14 {
             //單局合計14分 計算雙方總分並顯示
             scoreA += 1
-            playerABallView.frame.origin.y = CGFloat(60 + 40 * scoreA)
+            updatePlayerViewsPosition()
             roundScoreA = roundScoreA + scoreA - foulScoreA
             roundScoreB = roundScoreB + scoreB - foulScoreB
             scoreALabel.text = roundScoreA.formatted()
@@ -192,15 +223,17 @@ class ScoreViewController: UIViewController {
         
     }
     
+
+    
     @IBAction func addScoreB(_ sender: Any) {
-        
+
         if scoreA + scoreB < 13 {
             scoreB += 1
-            playerBBallView.frame.origin.y = CGFloat(60 + 40 * scoreB)
+            updatePlayerViewsPosition()
             getScoreArray.append(playerBScore)
         } else if scoreA + scoreB < 14 {
             scoreB += 1
-            playerBBallView.frame.origin.y = CGFloat(60 + 40 * scoreB)
+            updatePlayerViewsPosition()
             roundScoreA = roundScoreA + scoreA - foulScoreA
             roundScoreB = roundScoreB + scoreB - foulScoreB
             scoreALabel.text = roundScoreA.formatted()
@@ -266,8 +299,7 @@ class ScoreViewController: UIViewController {
             rounds += 1
             foulALabel.text = foulScoreA.formatted()
             foulBLabel.text = foulScoreB.formatted()
-            playerABallView.frame.origin.y = CGFloat(60)
-            playerBBallView.frame.origin.y = CGFloat(60)
+            updatePlayerViewsPosition()
             totalScoreAArray.append(roundScoreA)
             totalScoreBArray.append(roundScoreB)
             getScoreArray.removeAll()
@@ -285,7 +317,7 @@ class ScoreViewController: UIViewController {
         case playerAScore:
             if scoreA + scoreB == 14 {
                 scoreA -= 1
-                playerABallView.frame.origin.y = CGFloat(60 + 40 * scoreA)
+                updatePlayerViewsPosition()
                 roundScoreA = totalScoreAArray[rounds]
                 roundScoreB = totalScoreBArray[rounds]
                 scoreALabel.text = roundScoreA.formatted()
@@ -293,13 +325,13 @@ class ScoreViewController: UIViewController {
                 
             } else {
                 scoreA -= 1
-                playerABallView.frame.origin.y = CGFloat(60 + 40 * scoreA)
+                updatePlayerViewsPosition()
             }
             
         case playerBScore:
             if scoreA + scoreB == 14 {
                 scoreB -= 1
-                playerBBallView.frame.origin.y = CGFloat(60 + 40 * scoreB)
+                updatePlayerViewsPosition()
                 roundScoreA = totalScoreAArray[rounds]
                 roundScoreB = totalScoreBArray[rounds]
                 scoreALabel.text = roundScoreA.formatted()
@@ -307,7 +339,7 @@ class ScoreViewController: UIViewController {
                 
             } else {
                 scoreB -= 1
-                playerBBallView.frame.origin.y = CGFloat(60 + 40 * scoreB)
+                updatePlayerViewsPosition()
             }
             
         case playerAFoul:
@@ -324,10 +356,89 @@ class ScoreViewController: UIViewController {
         
     }
     
+    @IBAction func newGame(_ sender: Any) {
+        
+        let controller = UIAlertController(title: "重開新局", message: "確定要返回主畫面重新設定玩家、獲勝條件嗎？", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "確定", style: .default){ _ in
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        controller.addAction(okAction)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        controller.addAction(cancelAction)
+        present(controller, animated: true)
+    }
     
-    
-  
-    
+    func updatePlayerViewsPosition() {
+        switch scoreA {
+        case 0:
+            playerABallView.frame.origin.y = score0Label.frame.origin.y
+        case 1:
+            playerABallView.frame.origin.y = score1Label.frame.origin.y
+        case 2:
+            playerABallView.frame.origin.y = score2Label.frame.origin.y
+        case 3:
+            playerABallView.frame.origin.y = score3Label.frame.origin.y
+        case 4:
+            playerABallView.frame.origin.y = score4Label.frame.origin.y
+        case 5:
+            playerABallView.frame.origin.y = score5Label.frame.origin.y
+        case 6:
+            playerABallView.frame.origin.y = score6Label.frame.origin.y
+        case 7:
+            playerABallView.frame.origin.y = score7Label.frame.origin.y
+        case 8:
+            playerABallView.frame.origin.y = score8Label.frame.origin.y
+        case 9:
+            playerABallView.frame.origin.y = score9Label.frame.origin.y
+        case 10:
+            playerABallView.frame.origin.y = score10Label.frame.origin.y
+        case 11:
+            playerABallView.frame.origin.y = score11Label.frame.origin.y
+        case 12:
+            playerABallView.frame.origin.y = score12Label.frame.origin.y
+        case 13:
+            playerABallView.frame.origin.y = score13Label.frame.origin.y
+        case 14:
+            playerABallView.frame.origin.y = score14Label.frame.origin.y
+        default:
+            break
+        }
+        
+        switch scoreB {
+        case 0:
+            playerBBallView.frame.origin.y = score0Label.frame.origin.y
+        case 1:
+            playerBBallView.frame.origin.y = score1Label.frame.origin.y
+        case 2:
+            playerBBallView.frame.origin.y = score2Label.frame.origin.y
+        case 3:
+            playerBBallView.frame.origin.y = score3Label.frame.origin.y
+        case 4:
+            playerBBallView.frame.origin.y = score4Label.frame.origin.y
+        case 5:
+            playerBBallView.frame.origin.y = score5Label.frame.origin.y
+        case 6:
+            playerBBallView.frame.origin.y = score6Label.frame.origin.y
+        case 7:
+            playerBBallView.frame.origin.y = score7Label.frame.origin.y
+        case 8:
+            playerBBallView.frame.origin.y = score8Label.frame.origin.y
+        case 9:
+            playerBBallView.frame.origin.y = score9Label.frame.origin.y
+        case 10:
+            playerBBallView.frame.origin.y = score10Label.frame.origin.y
+        case 11:
+            playerBBallView.frame.origin.y = score11Label.frame.origin.y
+        case 12:
+            playerBBallView.frame.origin.y = score12Label.frame.origin.y
+        case 13:
+            playerBBallView.frame.origin.y = score13Label.frame.origin.y
+        case 14:
+            playerBBallView.frame.origin.y = score14Label.frame.origin.y
+        default:
+            break
+        }
+    }
     
     
     /*
