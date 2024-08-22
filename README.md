@@ -1,8 +1,11 @@
 撞球APP
 
 ViewController之間利用segue傳遞資料
+
 timer計算且顯示時間
+
 利用View frame.origin 在畫面的移動
+
 使用UIAlertController 提示操作
 
 
