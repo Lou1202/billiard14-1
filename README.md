@@ -1,4 +1,4 @@
-撞球APP
+撞球APP https://medium.com/彼得潘的-swift-ios-app-開發教室/18-撞球計分板-scoreboard-905d7b0324f3
 
 ViewController之間利用segue傳遞資料
 
